@@ -1,0 +1,86 @@
+{
+	// Place your snippets for csharp here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"Authorize Personnel": {
+		"prefix": "atp",
+		"body": "[AuthorizePersonnel]",
+		"description": "Adds [AuthorizePersonnel] attribute"
+	},
+	"Authorize Contributor": {
+		"prefix": "atp",
+		"body": "[AuthorizeContributor]",
+		"description": "Adds [AuthorizeContributor] attribute"
+	},
+	"Print to console": {
+		"prefix": "log",
+		"body": [
+			"console.log('$1');",
+			"$2"
+		],
+		"description": "Log output to console"
+	},
+	"Using Endpoints": {
+		"prefix": "enduse",
+		"body": [
+			"using Ardalis.ApiEndpoints;\nusing MH.SharedKernel.Core.Interfaces;\nusing MH.SharedKernel.Shared.Types;\nusing Microsoft.AspNetCore.Mvc;\nusing Swashbuckle.AspNetCore.Annotations;"
+		],
+		"description": "Add Endpoint Dependencies"
+	},
+	"ServiceResult": {
+		"prefix": "res",
+		"body": [
+			"ServiceResult<$1>"
+		],
+		"description": "Add Service Result"
+	},
+	"unit": {
+		"prefix": "u",
+		"body": [
+			"private readonly IUnitOfWork _unitofwork;"
+		],
+		"description": "Add UnitofWork Service "
+	},
+	"Endpoint": {
+		"prefix": "end",
+		"body": [
+			"public class $1$2Request",
+			"{",
+			"    public const string Route = \"api/$2/$1\";",
+			"    [FromBody]\n    public $1$2RequestBody Body { get; set; }",
+			"    public class $1$2RequestBody{\n    $0\n    }",
+			"}",
+			"public class $1$2 : ",
+			"          EndpointBaseAsync.WithRequest<$1$2Request>",
+			"          .WithResult<${3:ServiceResult<string>}>",
+			"{",
+			"  private readonly IUnitOfWork _unitofwork;",
+			"  public $1$2(IUnitOfWork unitofwork)",
+			"  {",
+			"    _unitofwork = unitofwork;",
+			"  }",
+			"  \n\n[Http{$4:Get}($1$2Request.Route)]",
+			"  [SwaggerOperation(",
+            "  Summary = \"$5\",",
+            "  Description = \"$5\",",
+			"  OperationId = \"$1.$2\",",
+            "  Tags = new[] { \"$6\" }",
+        	"  )]",
+			"  public override async Task<$3> HandleAsync",
+			"  ([FromRoute] $1$2Request request, CancellationToken cancellationToken = default)",
+			"  {\n    \n  }",
+			"}"
+		],
+		"description": "Add Endpoint Template"
+	}
+}
